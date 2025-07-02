@@ -1,0 +1,8 @@
+.job-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.heading{
+    color:aqua
+}
