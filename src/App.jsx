@@ -11,12 +11,12 @@
 // import Effectus from './effectus.jsx'
 // // import { createElement } from 'react'
 
-import { use, useRef, useTransition,useState } from "react";
+import { use, useRef, useTransition,useState, useActionState } from "react";
 
 // import {use, useState} from 'react'
 // import Usffect from './effectus.jsx'
 
-// // hooks are that are with use ! - speacial features  // useState, useEffect, useContext, useReducer, useRef, useMemo, useCallback etc
+// // hooks are that are with "use" ! - speacial features  // useState, useEffect, useContext, useReducer, useRef, useMemo, useCallback etc
 
 // function App() {
 
@@ -569,44 +569,97 @@ import { use, useRef, useTransition,useState } from "react";
 
 // DAY 04 UODATE object using state
 
+// const App=()=>{
+
+//   const[data,setData] = useState({
+//     name: " ",
+//     address: {
+//       city: " ",
+//       state: " "
+//     }
+//   });
+
+//   function updatename(val){
+//     data.name = val;
+//     setData({...data});
+//   }
+
+//   function updatecity(city){
+//     data.address.city = city;
+//     setData({...data})
+//   }
+
+//   function updatestate(state){
+//     data.address.state = state;
+//     setData({...data})
+//   }
+
+//   return(
+//     <div>
+//       <input type="text" placeholder="enter name" onChange={(event)=>updatename(event.target.value)} />
+//       <input type="text" placeholder="enter city" onChange={(event)=>updatecity(event.target.value)} />
+//       <input type="text" placeholder="enter state" onChange={(event)=>updatestate(event.target.value)} />
+
+//       <h1>name: {data.name}</h1>
+//       <h2>city: {data.address.city}</h2>
+//       <h2>state: {data.address.state}</h2>
+//     </div>
+//   )
+
+
+// }
+
+// export default App;
+
+
+
+// useActionState use case for form
+
 const App=()=>{
 
-  const[data,setData] = useState({
-    name: " ",
-    address: {
-      city: " ",
-      state: " "
+  const submitcalled = async (previousData,formdata)=>{
+
+    let name = formdata.get('name');
+    let password = formdata.get('password');
+
+    await new Promise(res => setTimeout(res,2000));
+
+    console.log("submitcalled:",name,password);
+
+    if(name && password){
+      return{message:'Data Submitted !',name,password}
     }
-  });
+    else{
+      return{error:'failed to submit',name,password}
+    }
 
-  function updatename(val){
-    data.name = val;
-    setData({...data});
   }
 
-  function updatecity(city){
-    data.address.city = city;
-    setData({...data})
-  }
-
-  function updatestate(state){
-    data.address.state = state;
-    setData({...data})
-  }
+  const [data,action,pending] = useActionState(submitcalled,undefined)
 
   return(
     <div>
-      <input type="text" placeholder="enter name" onChange={(event)=>updatename(event.target.value)} />
-      <input type="text" placeholder="enter city" onChange={(event)=>updatecity(event.target.value)} />
-      <input type="text" placeholder="enter state" onChange={(event)=>updatestate(event.target.value)} />
+      <h1>useActionState use </h1>
+      <form action={action}>
+        <input defaultValue={data?.name} type="text" placeholder="enter Name" name="name" />
+        <br /><br />
+        <input defaultValue={data?.password} type="password" placeholder="enter password" name="password" />
+        <br /><br />
+        <button disabled={pending}>Submit</button>
 
-      <h1>name: {data.name}</h1>
-      <h2>city: {data.address.city}</h2>
-      <h2>state: {data.address.state}</h2>
+        {
+          data?.error && <span style={{color:"red"}}>{data?.error}</span>
+        }
+        {
+          data?.message && <span style={{color:"green"}} >{data?.message}</span>
+        }
+      </form>
+
+      <h3>name:{data?.name}</h3>
+      <h3>password:{data?.password}</h3>
     </div>
   )
-
-
 }
+
 
 export default App;
