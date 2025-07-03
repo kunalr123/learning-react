@@ -11,7 +11,7 @@
 // import Effectus from './effectus.jsx'
 // // import { createElement } from 'react'
 
-import { use, useRef, useTransition,useState, useActionState } from "react";
+import { use, useRef, useTransition,useState, useActionState, Fragment, useId } from "react";
 
 // import {use, useState} from 'react'
 // import Usffect from './effectus.jsx'
@@ -615,51 +615,80 @@ import { use, useRef, useTransition,useState, useActionState } from "react";
 
 // useActionState use case for form
 
+// const App=()=>{
+
+//   const submitcalled = async (previousData,formdata)=>{
+
+//     let name = formdata.get('name');
+//     let password = formdata.get('password');
+
+//     await new Promise(res => setTimeout(res,2000));
+
+//     console.log("submitcalled:",name,password);
+
+//     if(name && password){
+//       return{message:'Data Submitted !',name,password}
+//     }
+//     else{
+//       return{error:'failed to submit',name,password}
+//     }
+
+//   }
+
+//   const [data,action,pending] = useActionState(submitcalled,undefined)
+
+//   return(
+//     <div>
+//       <h1>useActionState use </h1>
+//       <form action={action}>
+//         <input defaultValue={data?.name} type="text" placeholder="enter Name" name="name" />
+//         <br /><br />
+//         <input defaultValue={data?.password} type="password" placeholder="enter password" name="password" />
+//         <br /><br />
+//         <button disabled={pending}>Submit</button>
+
+//         {
+//           data?.error && <span style={{color:"red"}}>{data?.error}</span>
+//         }
+//         {
+//           data?.message && <span style={{color:"green"}} >{data?.message}</span>
+//         }
+//       </form>
+
+//       <h3>name:{data?.name}</h3>
+//       <h3>password:{data?.password}</h3>
+//     </div>
+//   )
+// }
+
+
+// export default App;
+
+
+// day 05 
+// Fragment - to remove extra div of componrnts
+// we can use empty tag also 
+
+
+// useId use for unique id to all components  when render !
+
+
 const App=()=>{
 
-  const submitcalled = async (previousData,formdata)=>{
+  const name = useId();
 
-    let name = formdata.get('name');
-    let password = formdata.get('password');
 
-    await new Promise(res => setTimeout(res,2000));
 
-    console.log("submitcalled:",name,password);
+return(
+    <>  //fragment 
+     <h2>hiii</h2>
+    <label htmlFor={name}> Name</label>
+    <input type="text" id={name} placeholder="Enter Name" />
+    <label htmlFor={name}> Name</label>
+    <input type="text" id={name} placeholder="Enter Name" />
 
-    if(name && password){
-      return{message:'Data Submitted !',name,password}
-    }
-    else{
-      return{error:'failed to submit',name,password}
-    }
-
-  }
-
-  const [data,action,pending] = useActionState(submitcalled,undefined)
-
-  return(
-    <div>
-      <h1>useActionState use </h1>
-      <form action={action}>
-        <input defaultValue={data?.name} type="text" placeholder="enter Name" name="name" />
-        <br /><br />
-        <input defaultValue={data?.password} type="password" placeholder="enter password" name="password" />
-        <br /><br />
-        <button disabled={pending}>Submit</button>
-
-        {
-          data?.error && <span style={{color:"red"}}>{data?.error}</span>
-        }
-        {
-          data?.message && <span style={{color:"green"}} >{data?.message}</span>
-        }
-      </form>
-
-      <h3>name:{data?.name}</h3>
-      <h3>password:{data?.password}</h3>
-    </div>
-  )
+    </>
+)
 }
-
 
 export default App;
