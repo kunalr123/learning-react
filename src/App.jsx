@@ -673,7 +673,15 @@ import { use, useRef, useTransition,useState, useActionState, Fragment, useId } 
 // useId use for unique id to all components  when render !
 
 
+// custom HOOKS 
+
+import useToggle from "./useToggle";
+
 const App=()=>{
+
+  const[value,toggle] = useToggle(true)
+
+  const[data,setData] = useToggle()
 
   const name = useId();
 
@@ -686,6 +694,24 @@ return(
     <input type="text" id={name} placeholder="Enter Name" />
     <label htmlFor={name}> Name</label>
     <input type="text" id={name} placeholder="Enter Name" />
+
+    
+    <button onClick={toggle} >Toggle </button>
+    <button onClick={()=>toggle(false)} > Hide </button>
+    <button onClick={()=>toggle(true)} > Show </button>
+
+    {
+      value ? <h1>Toggle is using custom Hooks</h1> : null
+    }
+
+    <br />
+
+     <button onClick={setData} >Toggle </button>
+    <button onClick={()=>setData(false)} > Hide </button>
+    <button onClick={()=>setData(true)} > Show </button>
+    {
+      data ? <h1>Its use case </h1> : null
+    }
 
     </>
 )
