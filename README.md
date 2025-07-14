@@ -45,3 +45,15 @@ data	Current state value (updated after action runs)
 Action	Function to trigger the action (used in forms)
 Pending	Boolean that tracks if action is running
 
+
+
+server side rendering = this is reload whole page and make new route 
+client side rendering   = this not reload whole page add new router in existing.
+
+Browser Routing - This components enables client side rendering using browser history api
+
+Routes - responsible for rendering appropriate components based on url
+
+Route - each route componenets define a path and corresponding components to render !'
+
+Link - naviagte from one page to annother !
