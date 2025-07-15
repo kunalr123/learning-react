@@ -719,21 +719,32 @@ import { use, useRef, useTransition,useState, useActionState, Fragment, useId } 
 
 // export default App;
 
-import {Routes, Route,Link} from 'react-router';
+import {Routes, Route, Navigate} from 'react-router';
+import  Navbar from './navlinks';
+import Home from './Home';
+import About from './About';
+import PageNotFound from './PageNotFound';
+import UserList from './userlist';
+import UserDetaile from "./userdetaile";
 
 function App() {
   return (
     <>
-
-    
+{/* 
+             <Link to={'/'} >Home</Link>
+             <Link to={'/about'} >About</Link>
+             <Link to={'/contact'}>Contact</Link> */}
 
     <Routes>
-      <Route path="/" element={<h1>Home Page</h1>} />
-      <Route path="/about" element={<h1>About Page</h1>} />
+      <Route path="/user" element={<UserList/>}></Route>
+      <Route path="/user/:id" element={<UserDetaile/>} ></Route>
+      <Route path="/" element={<Home/>} />
+      <Route path="/about" element={<About/>} />
       <Route path="/contact" element={<h1>Contact Page</h1>} />
       <Route path="/profile" element={<h1>Profile Page</h1>} />
+      <Route path="/*" element={<PageNotFound/>}></Route>
+      {/* <Route path="/*" element={<Navigate to="/"/>}></Route> */}
     </Routes>
-  
     </>
   );
 }
