@@ -57,3 +57,18 @@ Routes - responsible for rendering appropriate components based on url
 Route - each route componenets define a path and corresponding components to render !'
 
 Link - naviagte from one page to annother !
+NavLink - provide active class
+  
+What is API ? -- Application Programming Interface 
+
+js cannot connect with database
+so we make connection in node js 
+and use some api with all platform 
+
+Api Methods :
+
+GET - fetch the data 
+Post - store data 
+PUT/ PATCH - update data 
+DELETE - remove data from api 
+

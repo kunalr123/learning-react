@@ -11,7 +11,7 @@
 // import Effectus from './effectus.jsx'
 // // import { createElement } from 'react'
 
-import { use, useRef, useTransition,useState, useActionState, Fragment, useId } from "react";
+import { use, useRef, useTransition,useState, useActionState, Fragment, useId, useEffect } from "react";
 
 // import {use, useState} from 'react'
 // import Usffect from './effectus.jsx'
@@ -719,33 +719,208 @@ import { use, useRef, useTransition,useState, useActionState, Fragment, useId } 
 
 // export default App;
 
-import {Routes, Route, Navigate} from 'react-router';
-import  Navbar from './navlinks';
-import Home from './Home';
-import About from './About';
-import PageNotFound from './PageNotFound';
-import UserList from './userlist';
-import UserDetaile from "./userdetaile";
+// import {Routes, Route, Navigate} from 'react-router';
+// import  Navbar from './navlinks';
+// import Home from './Home';
+// import About from './About';
+// import PageNotFound from './PageNotFound';
+// import UserList from './userlist';
+// import UserDetaile from "./userdetaile";
 
-function App() {
-  return (
+// function App() {
+//   return (
+//     <>
+   
+//              <NavLink to={'/'} >Home</NavLink>  
+//              <Link to={'/about'} >About</Link>
+//              <Link to={'/contact'}>Contact</Link>
+
+//     <Routes>
+//       <Route path="/user" element={<UserList/>}></Route>
+//       <Route path="/user/:id/:name?" element={<UserDetaile/>} ></Route>
+//       <Route path="/" element={<Home/>} />
+//       <Route path="/about" element={<About/>} />
+//       <Route path="/contact" element={<h1>Contact Page</h1>} />
+//       <Route path="/profile" element={<h1>Profile Page</h1>} />
+//       <Route path="/*" element={<PageNotFound/>}></Route>
+//       {/* <Route path="/*" element={<Navigate to="/"/>}></Route> */}
+//     </Routes>
+//     </>
+//   );
+// }
+// export default App;
+
+
+
+
+// function App(){
+  
+//   const [Userdata, setUserdata] = useState([]);
+
+//   useEffect(()=>{
+//     userdataapi();
+//   },[])
+
+
+//   const userdataapi = async()=>  {
+//     const url = "http://localhost:3000/users";
+//     let response = await fetch(url);
+//     response = await response.json();
+//     console.log(response);
+//     setUserdata(response);
+//   }
+
+
+
+//   return(
+//     <div>
+//       <h1>Json Integration to react !</h1>
+//       {
+//         Userdata.map((user)=>(
+//           <h1 key={user}>{user.name}</h1>
+          
+//         ))
+//       }
+      
+//     </div>
+//   )
+// }
+
+// export default App;
+
+
+
+// function App() {
+
+//   const [name, setName] = useState("");
+//   const [nameerr, setNameErr] = useState();
+
+//   const [password, setPassword] = useState("");
+//   const [passerr, setPasswordErr] = useState();
+
+//   const handelname=(event)=>{
+//     if(event.target.value.length < 5){
+//       setNameErr("Name must be at least 5 characters long");
+//     }
+//     else{
+//       setNameErr('');
+//     }
+
+//   }
+
+//   const handelpass=(event)=>{
+//     let regex = /^[a-zA-Z0-9]+$/i; // At least 5 characters, alphanumeric and special characters allowed
+//     if(regex.test(event.target.value)){
+//       setPasswordErr("Name must be at least 5 characters long");
+//     }
+//     else{
+//       setPasswordErr('');
+//     }
+
+//   }
+
+
+//   return (
+//     <>
+
+//     <input className={nameerr?'error':''} type="text" onChange={handelname} placeholder="enter name" />
+//     <span>{nameerr && nameerr} </span> 
+//     <br />
+//     <input className={passerr?'error':''}   type="text" onChange={handelpass} 
+//     placeholder="enter pass" />
+//     <span>{passerr && passerr}</span>
+//     <br />
+//     <button>Login</button>
+
+//     </>
+//   )
+// }
+
+// export default App;
+
+
+// import { lazy, Suspense } from 'react';
+// // import User from './User';
+// const User = lazy(() => import('./UserONE'));
+
+// function App() {
+//   const [load, setLoad] = useState(false);
+
+//   return (
+//     <div>
+//       <h1>Lazy Loading</h1>
+
+//       {
+//       load? <Suspense fallback={<h3>loading...</h3>} > <User /> </Suspense>:null 
+//       }
+
+//       <button onClick={() => setLoad(true)}>Load User</button>
+//       {load ? (
+//         <Suspense fallback={<h3>loading...</h3>}>
+//           <User />
+//         </Suspense>
+//       ) : null}
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+
+function App(){
+
+  const colors= JSON.parse(localStorage.getItem("color"));
+
+  const[r,setR] = useState(colors && colors.r?colors.r:0);
+  const[g,setG] = useState(colors && colors.g?colors.g:0);
+  const[b,setB] = useState(colors && colors.b?colors.b:0);
+
+
+  const Save=()=>{
+    console.log("save combination",r,g,b);
+
+    localStorage.setItem("color",JSON.stringify({r,g,b}));
+
+  }
+  return(
     <>
-{/* 
-             <Link to={'/'} >Home</Link>
-             <Link to={'/about'} >About</Link>
-             <Link to={'/contact'}>Contact</Link> */}
+    <h1>Color Mixer</h1>
+    <div style={{backgroundColor:'rgb('+r+','+g+','+b+')',height:200,width:200 }}>
+      <div>
+        <label htmlFor="">Red</label>
+          <input type="range"
+          value={r}
+          onChange={(event)=>setR(event.target.value)} min={0} max = {255} />
+          <br />
+          <br />
+          <label htmlFor="">Green</label>
+           <input type="range"
+          value={g}
+          onChange={(event)=>setG(event.target.value)} min={0} max = {255} />
+          <br />
+          <br />
+          <label htmlFor="">Blue</label>
+           <input type="range"
+          value={b}
+          onChange={(event)=>setB(event.target.value)} min={0} max = {255} />
+          <br />
+          <br />
 
-    <Routes>
-      <Route path="/user" element={<UserList/>}></Route>
-      <Route path="/user/:id" element={<UserDetaile/>} ></Route>
-      <Route path="/" element={<Home/>} />
-      <Route path="/about" element={<About/>} />
-      <Route path="/contact" element={<h1>Contact Page</h1>} />
-      <Route path="/profile" element={<h1>Profile Page</h1>} />
-      <Route path="/*" element={<PageNotFound/>}></Route>
-      {/* <Route path="/*" element={<Navigate to="/"/>}></Route> */}
-    </Routes>
+          <button onClick={Save} >save combination</button>
+
+      </div>
+    </div>
+
+
     </>
-  );
+  )
 }
+
 export default App;
+
+
+
+
+
